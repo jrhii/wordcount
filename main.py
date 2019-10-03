@@ -23,6 +23,9 @@ def parseFile(filename):
 
     wordsAndNums = re.split(r"[\s\.,\?]+", exclamationStep)
 
+    # was getting bug where last item in list was an empty string so I am just deleting it
+    del wordsAndNums[-1]
+
     return wordsAndNums
 
 #Function: processWordList
