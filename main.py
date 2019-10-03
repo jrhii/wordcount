@@ -1,4 +1,4 @@
-# Author: Alex Grupas
+# Authors: Alex Grupas, James Harter, Ian Green
 
 import re
 import sys
@@ -25,6 +25,32 @@ def parseFile(filename):
 
     return wordsAndNums
 
+#Function: processWordList
+#Use: Takes a list of strings, outputs a list of dictionaries in the following form:
+#   [{"word": <String>, "count": <Number>}]
+def processWordList(wordList):
+
+    uniqueWordsDict = {word:0 for word in set(wordList)}
+
+    for word in wordList:
+        uniqueWordsDict[word] = uniqueWordsDict[word] + 1
+
+    uniqueWordsList = []
+    for word, count in uniqueWordsDict.items():
+        uniqueWordsList.append({"word": word, "count": count})
+    
+    return uniqueWordsList
+
+#Function: sortWordsByCount
+#Use: To be passed to `list.sort()` as key
+def sortWordsByCount(wordDict):
+    return wordDict["count"]
+
+#Function: sortWordsByAlpha
+#Use: To be passed to `list.sort()` as key
+def sortWordsByAlpha(wordDict):
+    return wordDict["word"]
+
 
 inFile = "test1.txt"
 
@@ -32,3 +58,6 @@ words = parseFile(inFile)
 print(type(words))
 print(words)
 print(len(words))
+
+wordDicts = processWordList(words)
+print wordDicts
